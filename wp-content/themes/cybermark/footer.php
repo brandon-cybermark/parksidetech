@@ -1,0 +1,133 @@
+<?php
+/**
+ * The template for displaying the footer
+ *
+ * Contains the closing of the #content div and all content after
+ *
+ */
+?>
+
+		</div><!-- .site-content -->
+
+<footer class="site-footer" >
+  <div class="container-fluid">
+    <div class="row row-eq-height">
+      <div class="col-md-4">
+        <div class="footer-branding">
+          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+            <?php 
+              $business_logo = get_field('business_logo', 'option'); 
+              if( !empty( $business_logo ) ): ?>
+                    <img src="<?php echo esc_url($business_logo['url']); ?>" alt="<?php echo esc_attr($business_logo['alt']); ?>" />
+                  <?php else:?>
+                    <h1><?php the_field('business_name', 'option'); ?></h1>
+                  <?php endif;?> 
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <nav class="footer-navigation">
+          <h3 class="footer-title">Navigation</h3>
+          <?php
+            wp_nav_menu(
+              array(
+                'theme_location' => 'footer',
+                'menu_class'     => 'primary-menu',
+              )
+            );
+          ?>
+        </nav><!-- .main-navigation -->
+      </div>
+      <div class="col-md-4">
+        <div class="footer-social">
+          <h3 class="footer-title">Follow Us</h3>
+          <ul class="social-list">
+            <?php if(get_field('facebook_url', 'option')):?>
+              <li><a href="<?php the_field('facebook_url', 'option'); ?>" target="_blank" title="Facebook"><span class="fab fa-facebook-f"></span></a></li>
+            <?php endif;
+            if(get_field('twitter_url', 'option')):?>
+              <li><a href="<?php the_field('twitter_url', 'option'); ?>" target="_blank" title="Twitter"><span class="fab fa-twitter"></span></a></li>
+            <?php endif;
+            if(get_field('linkedin_url', 'option')):?>
+              <li><a href="<?php the_field('linkedin_url', 'option'); ?>" target="_blank" title="LinkedIn"><span class="fab fa-linkedin"></span></a></li>
+            <?php endif;
+            if(get_field('instagram_url', 'option')):?>
+              <li><a href="<?php the_field('instagram_url', 'option'); ?>" target="_blank" title="Instagram"><span class="fab fa-instagram"></span></a></li>
+            <?php endif;
+            if(get_field('youtube_url', 'option')):?>
+              <li><a href="<?php the_field('youtube_url', 'option'); ?>" target="_blank" title="You Tube"><span class="fab fa-youtube"></span></a></li>
+            <?php endif;
+            if(get_field('yelp_url', 'option')):?>
+              <li><a href="<?php the_field('yelp_url', 'option'); ?>" target="_blank" title="Yelp"><span class="fab fa-yelp"></span></a></li>
+            <?php endif;
+            if(get_field('pinterest_url', 'option')):?>
+              <li><a href="<?php the_field('pinterest_url', 'option'); ?>" target="_blank" title="Pinterest"><span class="fab fa-pinterest"></span></a></li>
+            <?php endif;?>
+            
+          </ul>
+        </div>
+      </div>
+		
+</footer><!-- .site-footer -->
+<div class="copyright">
+	<div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-9">
+					<p>&copy; <?php echo date('Y');?> All Rights Reserved. <a href="<?php echo site_url();?>/" rel="home"><?php the_field( 'business_name', 'option' ); ?></a>. </p>
+			</div>
+      <div class="col-md-3">
+					<a href="https://www.cybermark.com/" rel="noreferrer" target="_blank" class="cybermark">Built By CyberMark</a>
+      </div>
+    </div>
+	</div>
+</div>
+<?php wp_footer(); ?>
+<script type="text/javascript">
+
+jQuery(document).ready(function($) {
+$('.menubars').on('click', function(){
+    if($('.mobile-menu').hasClass('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+   });
+  
+  function openMenu() {
+    $('.mobile-menu').toggleClass('active');
+    $('.menubackground').css('right', '0');
+    $('.menubackground').css('top', '-810px');
+    $('.top').css('top', '10px');
+    $('.bottom').css('top', '10px');
+    $('.mobile-menu ul').css('visibility','visible');
+    $('.top').css('transform', 'rotate(45deg)');
+    $('.bottom').css('transform', 'rotate(-45deg)');
+    $('.middle').css('transform', 'rotate(45deg)');
+  }
+  
+  function closeMenu() {
+      $('.mobile-menu').toggleClass('active');
+      $('.mobile-menu ul').css('visibility','hidden');
+      $('.top').css('top', '0px');
+      $('.bottom').css('top', '20px');
+      $('.top').css('transform', 'rotate(0deg)');
+      $('.middle').css('transform', 'rotate(0deg)');
+      $('.bottom').css('transform', 'rotate(0deg)');
+      $('.menubackground').css('right', '-2240px');
+      $('.menubackground').css('top', '-2240px');
+  }
+$(window).scroll(function() {
+      if ($(this).scrollTop() > 1){
+      $('.header').addClass('sticky');
+      }
+      else{
+      $('.header').removeClass('sticky');
+      }
+
+});
+});
+</script>
+<?php if(get_field('footer_scripts')):?><?php the_field('footer_scripts');?><?php endif;?>
+<?php if(get_field('footer_scripts', 'option')):?><?php the_field('footer_scripts', 'option');?><?php endif;?>
+</body>
+</html>

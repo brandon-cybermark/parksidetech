@@ -22,6 +22,15 @@ body.login {
     background-repeat: no-repeat;
     background-size: cover;
 }
+.acf-image-select label input {
+    display: none
+}
+.acf-image-select label img {
+    border: solid 3px #DDD;
+}
+.acf-image-select label.selected img {
+    border: solid 3px #0079FE;
+}
 
 #wp-admin-bar-my-sites-search.hide-if-no-js {
     display: none;

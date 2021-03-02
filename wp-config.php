@@ -84,11 +84,10 @@ define('ALLOW_UNFILTERED_UPLOADS', true);
 define('FS_METHOD','direct');
 define( 'DISALLOW_FILE_EDIT', true );
 
-
 //Define What Converts For Brand
-define('wc_key', '');
-define('wc_secret', '');
-define('account_id', '');
+define('wc_key', '9-041940e9597cf124');
+define('wc_secret', '36648f2d0dd1eaea4d464dba513d1e94');
+define('account_id', '9');
 
 /* That's all, stop editing! Happy publishing. */
 

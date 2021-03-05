@@ -1,4 +1,5 @@
-<header class="header">
+<?php $header = get_field('header_type','option');?>
+<header class="header" id="<?php echo $header;?>">
 	<div class="container-fluid">
 		<div class="site-header-main">
 			<div class="site-branding">
@@ -27,9 +28,9 @@
 								);
 							?>
 						</nav>
-						<div class="location-button">
-							<a href="<?php echo site_url();?>/contact-us/" class="btn loc-btn">
-								Button
+						<div class="header-button">
+							<a href="tel://<?php the_field('phone_number','option');?>" class="btn primary-btn clear-btn">
+								<?php the_field('phone_number','option');?>
 							</a>
 						</div>
 					</div>

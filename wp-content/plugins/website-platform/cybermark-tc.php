@@ -97,6 +97,44 @@ function testimonials_post_type() {
 }
 
 
+/* Load custom team area
+
+*/
+
+add_action( 'init', 'team_post_type' );
+function team_post_type() {
+    $labels = array(
+        'name' => 'Team',
+        'singular_name' => 'Team',
+        'add_new' => 'Add New',
+        'add_new_item' => 'Add New Team Member',
+        'edit_item' => 'Edit Team Member',
+        'new_item' => 'New Team Member',
+        'view_item' => 'View Team Members',
+        'search_items' => 'Search Team Members',
+        'not_found' =>  'No Team Members found',
+        'not_found_in_trash' => 'No Team Members in the trash',
+        'parent_item_colon' => '',
+    );
+
+    register_post_type( 'team', array(
+        'labels' => $labels,
+        'public' => true,
+        'publicly_queryable' => false,
+        'show_ui' => true,
+        'exclude_from_search' => true,
+        'query_var' => true,
+        "rewrite" => array( "slug" => "team", "with_front" => false ),
+        'capability_type' => 'post',
+        'has_archive' => false,
+        'hierarchical' => false,
+        'menu_position' => 5,
+        'menu_icon'   => 'dashicons-businessperson',
+      'supports' => array('title', 'editor', 'thumbnail'),
+    ) );
+}
+
+
 //ACF For Custom Posts and Pages
 if( function_exists('acf_add_local_field_group') ):
 
@@ -679,10 +717,9 @@ acf_add_local_field_group(array(
         'id' => '',
       ),
       'choices' => array(
-        'header_1' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Header/header-0.png"/>',
-        'header_2' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Header/header-1.png"/>',
-        'header_3' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Header/header-2.png"/>',
-        'header_4' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Header/header-3.png"/>',
+        'header_1' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Header/header-0.png" width="100%"/>',
+        'header_2' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Header/header-1.png" width="100%"/>',
+        'header_3' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Header/header-3.png" width="100%"/>',
       ),
       'allow_null' => 0,
       'other_choice' => 0,
@@ -721,11 +758,9 @@ acf_add_local_field_group(array(
         'id' => '',
       ),
       'choices' => array(
-        'footer_1' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-1.png"/>',
-        'footer_2' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-2.png"/>',
-        'footer_3' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-3.png"/>',
-        'footer_4' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-4.png"/>',
-        'footer_5' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-5.png"/>'
+        'footer_1' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-1.png" width="100%"/>',
+        'footer_2' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-2.png" width="100%"/>',
+        'footer_3' => '<img src="'.plugin_dir_url( __FILE__ ).'images/Footer/footer-4.png" width="100%"/>'
       ),
       'allow_null' => 0,
       'other_choice' => 0,
@@ -973,6 +1008,25 @@ acf_add_local_field_group(array(
       'maxlength' => '',
     ),
     array(
+      'key' => 'field_5c211cbe05a475645',
+      'label' => 'More Details',
+      'name' => 'more_Details',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
       'key' => 'field_5c211dcd4b41f',
       'label' => 'Review Details',
       'name' => 'review_details',
@@ -1025,7 +1079,106 @@ acf_add_local_field_group(array(
   'active' => true,
   'description' => '',
 ));
-
+acf_add_local_field_group(array(
+  'key' => 'group_5c211cb95db9f789',
+  'title' => 'Team Member Details',
+  'fields' => array(
+      array(
+        'key' => 'field_team_img',
+        'label' => 'Profile Image',
+        'name' => 'profile_image',
+        'type' => 'image',
+        'instructions' => '',
+        'required' => 0,
+        'conditional_logic' => 0,
+        'wrapper' => array(
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ),
+        'return_format' => 'array',
+        'preview_size' => 'thumbnail',
+        'library' => 'all',
+        'min_width' => '',
+        'min_height' => '',
+        'min_size' => '',
+        'max_width' => '',
+        'max_height' => '',
+        'max_size' => '',
+        'mime_types' => '',
+      ),
+    array(
+      'key' => 'field_5c24354345',
+      'label' => 'More Details',
+      'name' => 'more_Details',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5c21345345',
+      'label' => 'Team Member Bio',
+      'name' => 'team_member_bio',
+      'type' => 'wysiwyg',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'tabs' => 'all',
+      'toolbar' => 'full',
+      'media_upload' => 0,
+      'delay' => 0,
+    ),
+  ),
+  'location' => array(
+    array(
+      array(
+        'param' => 'post_type',
+        'operator' => '==',
+        'value' => 'team',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => array(
+    0 => 'permalink',
+    1 => 'the_content',
+    2 => 'excerpt',
+    3 => 'discussion',
+    4 => 'comments',
+    5 => 'revisions',
+    6 => 'slug',
+    7 => 'author',
+    8 => 'format',
+    9 => 'page_attributes',
+    10 => 'featured_image',
+    11 => 'categories',
+    12 => 'tags',
+    13 => 'send-trackbacks',
+  ),
+  'active' => true,
+  'description' => '',
+));
 acf_add_local_field_group(array(
   'key' => 'group_5b870a04810fa-2',
   'title' => 'Custom Scripts',

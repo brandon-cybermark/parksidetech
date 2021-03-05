@@ -1,7 +1,8 @@
-<footer class="site-footer" >
-  <div class="container-fluid">
-    <div class="row row-eq-height">
-      <div class="col-md-4">
+<?php $footer = get_field('footer_type','option');?>
+<footer class="site-footer" id="<?php echo $footer;?>">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 text-center mb-3">
         <div class="footer-branding">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
             <?php 
@@ -14,22 +15,13 @@
           </a>
         </div>
       </div>
-      <div class="col-md-4">
-        <nav class="footer-navigation">
-          <h3 class="footer-title">Navigation</h3>
-          <?php
-            wp_nav_menu(
-              array(
-                'theme_location' => 'footer',
-                'menu_class'     => 'primary-menu',
-              )
-            );
-          ?>
-        </nav><!-- .main-navigation -->
+      <div class="col-md-6 offset-md-3 text-center mb-3">
+        <div class="footer-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+        </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6 offset-md-3 text-center mb-3">
         <div class="footer-social">
-          <h3 class="footer-title">Follow Us</h3>
           <ul class="social-list">
             <?php if(get_field('facebook_url', 'option')):?>
               <li><a href="<?php the_field('facebook_url', 'option'); ?>" target="_blank" title="Facebook"><span class="fab fa-facebook-f"></span></a></li>
@@ -56,7 +48,8 @@
           </ul>
         </div>
       </div>
-		
+		</div>
+  </div>
 </footer><!-- .site-footer -->
 <div class="copyright">
 	<div class="container-fluid">

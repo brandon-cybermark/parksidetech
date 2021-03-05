@@ -78,7 +78,7 @@ $table_prefix = 'cm_website_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define('WP_DEBUG', true);
-define( 'WP_DEBUG_DISPLAY', true );
+define( 'WP_DEBUG_DISPLAY', false );
 define('WP_MEMORY_LIMIT', '512M');
 define('ALLOW_UNFILTERED_UPLOADS', true);
 define('FS_METHOD','direct');

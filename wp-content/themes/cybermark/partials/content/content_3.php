@@ -1,7 +1,7 @@
 <section class="content_3 section__wrapper">
 	<span class="h6 section__title">Content 3</span>
 	<div class="container">
-		<div class="row flex-row-reverse">
+		<div class="row flex-row-reverse align-items-center">
 			<div class="col-md-6">
 				<div class="section__container">
 					<div class="section__content">

@@ -1,7 +1,7 @@
 <section class="content_2 section__wrapper">
 	<span class="h6 section__title">Content 2</span>
 	<div class="container">
-		<div class="row">
+		<div class="row align-items-center">
 			<div class="col-md-6">
 				<div class="section__container">
 					<div class="section__content">

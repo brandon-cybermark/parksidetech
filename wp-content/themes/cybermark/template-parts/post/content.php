@@ -20,16 +20,7 @@
 	?>
 	<header class="entry-header">
 		<?php
-		if ( 'post' === get_post_type() ) {
-			echo '<div class="entry-meta">';
-			if ( is_single() ) {
-				cybermark_posted_on();
-			} else {
-				echo cybermark_time_link();
-				cybermark_edit_link();
-			};
-			echo '</div><!-- .entry-meta -->';
-		};
+		
 
 		if ( is_single() ) {
 			the_title( '<h1 class="entry-title">', '</h1>' );
@@ -41,13 +32,23 @@
 		?>
 	</header><!-- .entry-header -->
 
-	<?php if ( '' !== get_the_post_thumbnail() && ! is_single() ) : ?>
+	<?php if ( '' !== get_the_post_thumbnail() ) : ?>
 		<div class="post-thumbnail">
 			<a href="<?php the_permalink(); ?>">
 				<?php the_post_thumbnail( 'cybermark-featured-image' ); ?>
 			</a>
 		</div><!-- .post-thumbnail -->
-	<?php endif; ?>
+	<?php endif; 
+	if ( 'post' === get_post_type() ) {
+			echo '<div class="entry-meta">';
+			if ( is_single() ) {
+				cybermark_posted_on();
+			} else {
+				echo cybermark_time_link();
+				cybermark_edit_link();
+			};
+			echo '</div><!-- .entry-meta -->';
+		};?>
 
 	<div class="entry-content">
 		<?php

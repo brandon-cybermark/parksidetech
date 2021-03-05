@@ -8,7 +8,23 @@
 ?>
 
 		</div><!-- .site-content -->
-
+<?php $header = get_field('footer_type','option');
+  if($header == 'footer_1'){
+    get_template_part('template-parts/footer/footer-1');
+  }
+  elseif($header == 'footer_2'){
+    get_template_part('template-parts/footer/footer-2');
+  }
+  if($header == 'footer_3'){
+    get_template_part('template-parts/footer/footer-3');
+  }
+  if($header == 'footer_4'){
+    get_template_part('template-parts/footer/footer-4');
+  }
+  if($header == 'footer_5'){
+    get_template_part('template-parts/footer/footer-5');
+  }
+?>
 
 <?php wp_footer(); ?>
 <script type="text/javascript">

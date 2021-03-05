@@ -140,14 +140,11 @@ add_action( 'wp_head', 'cybermark_javascript_detection', 0 );
  * Enqueues scripts and styles.
  */
 function cybermark_scripts() {
-	// Load Bootstrap and Fontawesome
-  	wp_enqueue_style( 'fancybox', get_template_directory_uri() . '/assets/css/jquery.fancybox.css', 0 );
-  	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', 0 );
-  	wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/css/all.min.css', 0); 
 	// Theme stylesheet.
-	wp_enqueue_style( 'cybermark-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'cybermark-style', get_stylesheet_uri(), 99 );
 	// Load the html5 shiv.
 	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
+	wp_enqueue_script( 'search', get_theme_file_uri( '/assets/js/search.js' ), array(), '3.7.3' );
 	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 	wp_enqueue_script( 'cybermark-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
 	$cybermark_l10n = array(
@@ -264,4 +261,47 @@ add_action( 'wp_footer', 'themebs_enqueue_scripts');
 // Add CyberMark approved custom plugins for website development
 require_once get_template_directory() . '/inc/tgm_pa.php';
 
+//Add theme options to stylesheet
+function hook_css() {
+		$primary_color = get_field('primary_color', 'option');
+		$secondary_color= get_field('secondary_color', 'option');
+	    $link_color = get_field('link_color', 'option');
+	    $link_hover_color = get_field('link_hover_color', 'option');
+	    $body_font_color = get_field('body_font_color', 'option');
+	    $h1_color = get_field('h1_color', 'option');
+	    $h2_color = get_field('h2_color', 'option');
+	    $h3_color = get_field('h3_color', 'option');
+	    $h4_color = get_field('h4_color', 'option');
+	    $h5_color = get_field('h5_color', 'option');
+	    $h6_color = get_field('h6_color', 'option');
+	?>
+            <style>
+            	:root{
+		            --primary-color: <?php echo $primary_color;?>;
+			    	--secondary-color: <?php echo $secondary_color;?>;
+			    	--link-color: <?php echo $link_color;?>;
+			    	--link-hover-color: <?php echo $link_hover_color;?>;
+			    	--body-font-color: <?php echo $body_font_color;?>;
+			    	--h1-color: <?php echo $h1_color;?>;
+			    	--h2-color: <?php echo $h2_color;?>;
+			    	--h3-color: <?php echo $h3_color;?>;
+			    	--h4-color: <?php echo $h4_color;?>;
+			    	--h5-color: <?php echo $h5_color;?>;
+			    	--h6-color: <?php echo $h6_color;?>;
+			    }
+			    a {color: <?php echo $link_color;?>;}
+			    a:hover {color: <?php echo $link_hover_color;?>;}
+			    body {color: <?php echo $body_font_color;?>;}
+			    h1 {color: <?php echo $h1_color;?>;}
+			    h2 {color: <?php echo $h2_color;?>;}
+			    h3 {color: <?php echo $h3_color;?>;}
+			    h4 {color: <?php echo $h4_color;?>;}
+			    h5 {color: <?php echo $h5_color;?>;}
+			    h6 {color: <?php echo $h6_color;?>;}
+	    </style>
+    	<?php
+    }
+    add_action('wp_head', 'hook_css');
 
+//Add jquery to header
+wp_enqueue_script( 'jquery' );

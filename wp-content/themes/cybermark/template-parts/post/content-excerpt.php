@@ -18,11 +18,11 @@
 		<div class="blog-entry-inner clr">
 			<div class="row align-items-center">
 					<?php if ( has_post_thumbnail() ):?>
-						<div class="col-lg-6">
+						<div class="col-lg-12 mb-3">
 							<?php the_post_thumbnail();?>
 						</div>
 					<?php endif; ?>
-				<div class="<?php if ( has_post_thumbnail() ):?>col-lg-6<?php else:?>col-12<?php endif;?>">
+				<div class="col-12">
 
 				<header class="blog-entry-header clr">
 					<div class="meta clr">
@@ -49,7 +49,7 @@
 				</div><!-- .blog-entry-summary -->
 
 				<div class="blog-entry-readmore clr">
-				    <a href="<?php the_permalink(); ?>" title="" class="btn button-large read-more">Read More</a>
+				    <a href="<?php the_permalink(); ?>" title="" class="btn primary-btn">Read More</a>
 				</div><!-- .blog-entry-readmore -->
 
 

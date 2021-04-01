@@ -19,21 +19,25 @@
 			<div class="row align-items-center">
 					<?php if ( has_post_thumbnail() ):?>
 						<div class="col-lg-12 mb-3">
-							<?php the_post_thumbnail();?>
+							<div class="featured_img">
+								<?php the_post_thumbnail();?>
+								<div class="meta clr">
+									<span class="meta-cat"><?php the_category( ' / ', get_the_ID() ); ?></span>
+								</div>
+							</div>
 						</div>
 					<?php endif; ?>
 				<div class="col-12">
 
 				<header class="blog-entry-header clr">
 					<div class="meta clr">
-						<span class="meta-cat"><?php the_category( ' / ', get_the_ID() ); ?></span>
+						<span class="meta-date"><?php echo get_the_date(); ?></span>
+						<span class="meta-auth"><?php echo get_the_author(); ?></span>
 					</div>
+					
 					<h2 class="blog-entry-title entry-title">
 						<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
 					</h2><!-- .blog-entry-title -->
-					<div class="meta clr">
-						<span class="meta-date"><?php echo get_the_date(); ?></span>
-					</div>
 				</header><!-- .blog-entry-header -->
 
 				<div class="blog-entry-summary clr">

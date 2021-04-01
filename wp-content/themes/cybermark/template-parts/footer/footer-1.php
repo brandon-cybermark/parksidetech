@@ -49,17 +49,17 @@
         </div>
       </div>
 		</div>
-  </div>
-</footer><!-- .site-footer -->
+  </div><!-- .site-footer -->
 <div class="copyright">
-	<div class="container-fluid">
+  <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-md-9">
-					<p>&copy; <?php echo date('Y');?> All Rights Reserved. <a href="<?php echo site_url();?>/" rel="home"><?php the_field( 'business_name', 'option' ); ?></a>. </p>
-			</div>
+          <p>&copy; <?php echo date('Y');?> All Rights Reserved. <a href="<?php echo site_url();?>/" rel="home"><?php the_field( 'business_name', 'option' ); ?></a>. </p>
+      </div>
       <div class="col-md-3">
-					<a href="https://www.cybermark.com/" rel="noreferrer" target="_blank" class="cybermark">Built By CyberMark</a>
+          <a href="https://www.cybermark.com/" rel="noreferrer" target="_blank" class="cybermark">Built By CyberMark</a>
       </div>
     </div>
-	</div>
+  </div>
 </div>
+</footer>

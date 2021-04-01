@@ -30,7 +30,7 @@
 						</nav>
 						<div class="header-button">
 							<a href="<?php echo site_url();?>/contact-us/" class="btn primary-btn">
-								Free Quote
+								<?php the_field('header_btn_text','option');?>
 							</a>
 							<a href="tel://<?php the_field('phone_number','option');?>" class="btn primary-btn clear-btn">
 								<?php the_field('phone_number','option');?>

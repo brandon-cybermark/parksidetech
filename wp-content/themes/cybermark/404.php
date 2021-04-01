@@ -11,15 +11,14 @@
  */
 
 get_header(); ?>
-<div class="section__wrapper">
-	<div class="container">
-		<div id="primary" class="content-area">
-			<main id="main" class="site-main" role="main">
+<div class="section__wrapper vh-100">
+	<div class="container h-100">
+		<div id="primary" class="content-area h-100">
 
-				<section class="error-404 not-found">
+				<section class="error-404 not-found h-100">
 					<header class="page-header text-center">
 						<h1><?php _e( 'Oops! That page can&rsquo;t be found.', 'cybermark' ); ?></h1>
-						<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'cybermark' ); ?></p>
+						<p><?php _e( 'It looks like nothing was found. Maybe try a search?', 'cybermark' ); ?></p>
 					</header><!-- .page-header -->
 					<div class="page-content">
 
@@ -27,7 +26,6 @@ get_header(); ?>
 
 					</div><!-- .page-content -->
 				</section><!-- .error-404 -->
-			</main><!-- #main -->
 		</div><!-- #primary -->
 	</div><!-- .wrap -->
 </div>

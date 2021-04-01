@@ -40,6 +40,103 @@ function disable_default_dashboard_widgets() {
 add_action('admin_menu', 'disable_default_dashboard_widgets');
 
 
+// disable default network dashboard widgets
+function disable_default_network_dashboard_widgets() {
+  remove_meta_box('network_dashboard_right_now', 'dashboard-network', 'core');
+  remove_meta_box('dashboard_primary', 'dashboard-network', 'core');
+  remove_meta_box('dashboard_secondary', 'dashboard-network', 'core');
+}
+add_action('network_admin_menu', 'disable_default_network_dashboard_widgets');
+
+/**
+ * Remove the default welcome dashboard message and replace with CyberMark Dashboard
+ *
+ */
+class Replace_WP_Dashboard {
+    protected $capability = 'read';
+    protected $title;
+    final public function __construct() {
+        if( is_admin() || is_network_admin()) {
+            add_action( 'init', array( $this, 'init' ) );
+        }
+    }
+    final public function init() {
+        if( current_user_can( $this->capability ) ) {
+            $this->set_title();
+            add_filter( 'admin_title', array( $this, 'admin_title' ), 10, 2 );
+            add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+            add_action( 'current_screen', array( $this, 'current_screen' ) );
+        }
+    }
+    /**
+     * Sets the page title for your custom dashboard
+     */
+    function set_title() {
+        if( ! isset( $this->title ) ) {
+            $this->title = __( 'CyberMark Dashboard' );
+        }
+    }
+    /**
+     * Output the content for your custom dashboard
+     */
+    function page_content() {
+         include 'dashboard.php';
+    }
+    /**
+     * Fixes the page title in the browser.
+     *
+     * @param string $admin_title
+     * @param string $title
+     * @return string $admin_title
+     */
+    final public function admin_title( $admin_title, $title ) {
+        global $pagenow;
+        if( 'admin.php' == $pagenow && isset( $_GET['page'] ) && 'cybermark' == $_GET['page'] ) {
+            $admin_title = $this->title . $admin_title;
+        }
+        return $admin_title;
+    }
+    final public function admin_menu() {
+        /**
+         * Adds a custom page to WordPress
+         */
+        add_menu_page( $this->title, '', $this->capability, 'cybermark', array( $this, 'page_content' ) );
+        /**
+         * Remove the custom page from the admin menu
+         */
+        remove_menu_page('cybermark');
+        /**
+         * Make dashboard menu item the active item
+         */
+        global $parent_file, $submenu_file;
+        $parent_file = 'index.php';
+        $submenu_file = 'index.php';
+        /**
+         * Rename the dashboard menu item
+         */
+        global $menu;
+        $menu[2][0] = $this->title;
+        /**
+         * Rename the dashboard submenu item
+         */
+        global $submenu;
+        $submenu['index.php'][0][0] = 'Dashboard';
+    }
+    /**
+     * Redirect users from the normal dashboard to your custom dashboard
+     */
+    final public function current_screen( $screen ) {
+        if( 'dashboard' == $screen->id ) {
+            wp_safe_redirect( admin_url('admin.php?page=cybermark') );
+            exit;
+        }
+        // if( 'dashboard-network' == $screen->id ) {
+        //     wp_safe_redirect( admin_url('admin.php?page=cybermark') );
+        //     exit;
+        // }
+    }
+}
+new Replace_WP_Dashboard();
 //Add CyberMark Smart Support Widget
 function custom_admin_js() {
     $url = get_bloginfo('template_directory') . '/js/wp-admin.js';
@@ -67,7 +164,7 @@ function remove_from_admin_bar($wp_admin_bar) {
         $wp_admin_bar->remove_node('comments');
         $wp_admin_bar->remove_node('new-content');
         $wp_admin_bar->remove_node('wp-logo');
-        //$wp_admin_bar->remove_node('site-name');
+        $wp_admin_bar->remove_node('site-name');
         //$wp_admin_bar->remove_node('my-account');
         $wp_admin_bar->remove_node('search');
         $wp_admin_bar->remove_node('customize');
@@ -114,20 +211,7 @@ $wp_admin_bar->add_menu( array(
  
 }
 }
-// Creates Custom Options Page for CyberMark Admin
-if( function_exists('acf_add_options_page') ) {
-  
-  acf_add_options_page(array(
-    'page_title'  => 'Website Settings',
-    'position' => 1,
-    'menu_title'  => 'Website Settings',
-    'menu_slug'   => 'website-settings',
-    'capability'  => 'edit_posts',
-    'icon_url' =>  plugins_url( 'images/icon-burst.png', __FILE__),
-    'redirect'    => false
-  ));
-  
-}
+
 //ACF For CyberMark Integrations
 if( function_exists('acf_add_local_field_group') ):
 acf_add_local_field_group(array(
@@ -249,6 +333,56 @@ acf_add_local_field_group(array(
 ));
 endif;
 
+//Add New CyberMark Main Admin Menu
+function cybermark_custom_menu_page(){
+    add_menu_page( 
+        __( 'CyberMark', 'cybermark' ),
+        'Cybermark',
+        'manage_options',
+        'cybermark_page',
+        'cm_custom_menu_page',
+        plugins_url( 'images/burst.png', __FILE__) ,
+        2
+    ); 
+}
+add_action( 'admin_menu', 'cybermark_custom_menu_page' );
+/**
+ * Display a custom menu page
+ */
+function cm_custom_menu_page(){
+    esc_html_e( 'Admin Page Test', 'cybermark' );  
+}
+
+
+//Add new CyberMark Lead Tracking Tool Admin menu item to dashboard. Built for Reporting Tool Integration into website
+add_action('admin_menu', 'lead_tracking_create');
+function lead_tracking_create() {
+    $page_title = 'CyberMark Lead Tracking';
+    $menu_title = 'CyberMark Lead Tracking';
+    $capability = 'read';
+    $menu_slug = 'lead_tracking';
+    $function = 'lead_tracking_create_display';
+    $position = 2;
+    add_submenu_page( 'cybermark_page', $page_title, $menu_title, $capability, $menu_slug, $function, $position );
+}
+function lead_tracking_create_display() {
+    include 'what-converts.php';
+}
+//Add new CyberMark Support Admin menu item to dashboard. Built for Reporting Tool Integration into website
+add_action('admin_menu', 'cybermark_support_create');
+function cybermark_support_create() {
+    $page_title = 'SMART Support';
+    $menu_title = 'SMART Support';
+    $capability = 'read';
+    $menu_slug = 'cybermark_support';
+    $function = 'cybermark_support_create_display';
+    $position = 2;
+    add_submenu_page( 'cybermark_page', $page_title, $menu_title, $capability, $menu_slug, $function, $position );
+}
+function cybermark_support_create_display() {
+    include 'cybermark-support.php';
+}
+
 
 //Add dashboard custom stylesheet
 function cybermark_tc_css() {
@@ -309,3 +443,71 @@ $post_id = "options";
 update_field( 'api_token', ''.wc_key.'', $post_id );
 update_field( 'api_secret', ''.wc_secret.'', $post_id );
 update_field( 'account_id', ''.account_id.'', $post_id );
+
+//Add What Converts to WP Head
+add_action( 'wp_head', 'cybermark_wc_script' );
+function cybermark_wc_script() {
+  $profile_id = get_field('profile_id', 'option');
+  if($profile_id){?>
+    <script src="//scripts.iconnode.com/<?php echo $profile_id; ?>.js"></script>
+  <?php }
+}
+//Add Notice after save
+add_action( 'network_admin_notices', 'cybermark_custom_notices' );
+ 
+function cybermark_custom_notices(){
+ 
+  if( isset($_GET['page']) && $_GET['page'] == 'cybermark-options' && isset( $_GET['updated'] )  ) {
+    echo '<div id="message" class="updated notice is-dismissible"><p>Settings updated. You\'re the best!</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
+  }
+ 
+}
+
+//Add menu items to Admin Menu
+add_action('admin_bar_menu', 'add_toolbar_items', 100);
+function add_toolbar_items($admin_bar){
+  if (! is_network_admin() ) {
+    $admin_bar->add_menu( array(
+        'id'    => 'site_url',
+        'title' => 'View Website',
+        'href'  => ''.site_url().'/',
+        'meta'  => array(
+            'title' => __('View Website'),            
+        ),
+    ));
+    $admin_bar->add_menu( array(
+        'id'    => 'dashboard',
+        'title' => 'Dashboard',
+        'href'  => ''.admin_url().'admin.php?page=cybermark',
+        'meta'  => array(
+            'title' => __('Dashboard'),            
+        ),
+    ));
+    if(current_user_can('administrator')) {
+      $admin_bar->add_menu( array(
+          'id'    => 'all-locations',
+          'title' => 'All Websites',
+          'href'  => ''.admin_url().'admin.php?page=all_locations',
+          'meta'  => array(
+              'title' => __('All Websites'),            
+          ),
+      ));
+    }
+    $admin_bar->add_menu( array(
+        'id'    => 'leads',
+        'title' => 'Leads',
+        'href'  => ''.admin_url().'admin.php?page=lead_tracking',
+        'meta'  => array(
+            'title' => __('Support'),            
+        ),
+    ));
+    $admin_bar->add_menu( array(
+        'id'    => 'support',
+        'title' => 'Smart Support',
+        'href'  => ''.admin_url().'admin.php?page=cybermark_support',
+        'meta'  => array(
+            'title' => __('Support'),            
+        ),
+    ));
+}
+}

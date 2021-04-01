@@ -20,99 +20,44 @@ get_header(); ?>
 <div class="wrap">
 	<?php
 	get_template_part('template-parts/banner');
-if (have_rows('page_builder')) :
+	if (have_rows('page_builder')) :
 	while (have_rows('page_builder')) :
 		$label = get_field_object('page_builder');
 		the_row();
 		switch (get_row_layout()) {
-			case 'intro_1':
-				get_template_part('partials/intro/intro_1');
+			case 'intro_section':
+				get_template_part('partials/intro');
 				break;
-			case 'intro_2':
-				get_template_part('partials/intro/intro_2');
+			case 'content_section':
+				get_template_part('partials/content');
 				break;
-			case 'intro_3':
-				get_template_part('partials/intro/intro_3');
+			case 'gallery_section':
+				get_template_part('partials/gallery');
 				break;
-			case 'intro_4':
-				get_template_part('partials/intro/intro_4');
+			case 'features_section':
+				get_template_part('partials/features');
 				break;
-			case 'intro_5':
-				get_template_part('partials/intro/intro_5');
+			case 'team_section':
+				get_template_part('partials/team');
 				break;
-			case 'content_1':
-				get_template_part('partials/content/content_1');
+			case 'pricing_section':
+				get_template_part('partials/pricing');
 				break;
-			case 'content_2':
-				get_template_part('partials/content/content_2');
+			case 'testimonial_section':
+				get_template_part('partials/testimonial');
 				break;
-			case 'content_3':
-				get_template_part('partials/content/content_3');
+			case 'contact_section':
+				get_template_part('partials/contact');
 				break;
-			case 'gallery_1':
-				get_template_part('partials/gallery/gallery_1');
+			case 'blog_section':
+				get_template_part('partials/blog');
 				break;
-			case 'gallery_2':
-				get_template_part('partials/gallery/gallery_2');
+			case 'pricing_tables':
+				get_template_part('partials/pricing');
 				break;
-			case 'gallery_3':
-				get_template_part('partials/gallery/gallery_3');
+			case 'faq_section':
+				get_template_part('partials/faq');
 				break;
-			case 'features_1':
-				get_template_part('partials/features/features_1');
-				break;
-			case 'features_2':
-				get_template_part('partials/features/features_2');
-				break;
-			case 'features_3':
-				get_template_part('partials/features/features_3');
-				break;
-			case 'features_4':
-				get_template_part('partials/features/features_4');
-				break;
-			case 'team_1':
-				get_template_part('partials/team/team_1');
-				break;
-			case 'team_2':
-				get_template_part('partials/team/team_2');
-				break;
-			case 'team_3':
-				get_template_part('partials/team/team_3');
-				break;
-			case 'team_4':
-				get_template_part('partials/team/team_4');
-				break;
-			case 'pricing_1':
-				get_template_part('partials/pricing/pricing_1');
-				break;
-			case 'pricing_2':
-				get_template_part('partials/pricing/pricing_2');
-				break;
-			case 'pricing_3':
-				get_template_part('partials/pricing/pricing_3');
-				break;
-			case 'pricing_4':
-				get_template_part('partials/pricing/pricing_4');
-				break;
-			case 'testimonial_1':
-				get_template_part('partials/testimonial/testimonial_1');
-				break;
-			case 'testimonial_2':
-				get_template_part('partials/testimonial/testimonial_2');
-				break;
-			case 'contact_1':
-				get_template_part('partials/contact/contact_1');
-				break;
-			case 'contact_2':
-				get_template_part('partials/contact/contact_2');
-				break;
-			case 'contact_3':
-				get_template_part('partials/contact/contact_3');
-				break;
-			case 'contact_4':
-				get_template_part('partials/contact/contact_4');
-				break;
-
 		} //end switch
 	endwhile;
 endif;?>

@@ -134,7 +134,21 @@ function team_post_type() {
     ) );
 }
 
-
+// Creates Custom Options Page for CyberMark Admin
+if( function_exists('acf_add_options_page') ) {
+  
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Website Settings',
+    'position' => 1,
+    'menu_title'  => 'Website Settings',
+    'menu_slug'   => 'website-settings',
+    'parent_slug' => 'cybermark_page',
+    'capability'  => 'edit_posts',
+    'icon_url' =>  plugins_url( 'images/burst.png', __FILE__),
+    'redirect'    => false
+  ));
+  
+}
 //ACF For Custom Posts and Pages
 if( function_exists('acf_add_local_field_group') ):
 
@@ -704,6 +718,25 @@ acf_add_local_field_group(array(
       'endpoint' => 0,
     ),
     array(
+      'key' => 'field_5afdb2a7489796',
+      'label' => 'Header Button text',
+      'name' => 'header_btn_text',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '100',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'maxlength' => '',
+      'rows' => '',
+      'new_lines' => '',
+    ),
+    array(
       'key' => 'field_602e963f6947a',
       'label' => 'Header Type',
       'name' => 'header_type',
@@ -949,6 +982,41 @@ acf_add_local_field_group(array(
         'id' => '',
       ),
       'default_value' => '',
+    ),
+    array(
+      'key' => 'field_5bbb97987',
+      'label' => 'Custom CSS',
+      'name' => '',
+      'type' => 'tab',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'placement' => 'left',
+      'endpoint' => 0,
+    ),
+    array(
+      'key' => 'field_5a7987',
+      'label' => 'Custom CSS',
+      'name' => 'custom_css',
+      'type' => 'textarea',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '100',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'maxlength' => '',
+      'rows' => '',
+      'new_lines' => '',
     ),
   ),
   'location' => array(
@@ -1284,3 +1352,839 @@ add_action( 'wpseo_register_extra_replacements', function() {
      wpseo_register_var_replacement( '%%state%%', 'state_function', 'advanced', '' ); 
    } 
 );
+
+
+
+
+//Add scripts to WP Head of template
+add_action( 'wp_head', 'wp_head_open' );
+function wp_head_open() {
+  $google_tag_manager_head = get_field('google_tag_manager_head', 'option');
+  $site_header_scripts = get_field('header_scripts', 'option');
+  $custom_css = get_field('custom_css', 'option');
+  if($site_header_scripts){
+    echo stripslashes($site_header_scripts);
+  }
+  if($google_tag_manager_head){
+    echo stripslashes($google_tag_manager_head);
+  }
+  if($custom_css){
+    echo '<style>';
+    echo stripslashes($custom_css);
+    echo '</style>';
+  }
+}
+
+//Add scripts to opening body tag
+add_action( 'wp_body_open', 'cybermark_body_scripts' );
+function cybermark_body_scripts() {
+  $gtm_body_script = get_field('google_tag_manager_body', 'option');
+  if($gtm_body_script){
+    echo stripslashes($gtm_body_script);
+  }
+}
+
+//Add Page Header Scripts to Wp Head
+add_action( 'wp_head', 'page_header_script' );
+function page_header_script() {
+  $page_header_scripts = get_field('header_scripts');
+  if($page_header_scripts){
+    echo stripslashes($page_header_scripts);
+  }
+}
+//Add Page Footer Scripts to Wp Footer
+function page_footer_script() {
+  $page_footer_scripts = get_field('footer_scripts');
+  $site_footer_scripts = get_field('footer_scripts', 'option');
+  if($page_footer_scripts){
+    echo stripslashes($page_footer_scripts);
+  }
+  if($site_footer_scripts){
+    echo stripslashes($site_footer_scripts);
+  }
+}
+add_action( 'wp_footer', 'page_footer_script' );
+
+//CyberMark Landing Page custom post
+function cpts_landing_page() {
+    $labels = array(
+        "name" => __( "Landing Page", "cybermark" ),
+        "singular_name" => __( "Landing Page", "cybermark" ),
+        "menu_name" => __( "Landing Pages", "cybermark" ),
+        "all_items" => __( "All Landing Pages", "cybermark" ),
+        "add_new" => __( "Add Landing Page", "cybermark" ),
+        "add_new_item" => __( "Add New Landing Page", "cybermark" ),
+        "edit_item" => __( "Edit Landing Page", "cybermark" ),
+        "new_item" => __( "New Landing Page", "cybermark" ),
+        "view_item" => __( "View Landing Page", "cybermark" ),
+        "view_items" => __( "View Landing Pages", "cybermark" ),
+        "search_items" => __( "Search Landing Pages", "cybermark" ),
+        "not_found" => __( "No Landing Pages Found", "cybermark" ),
+    );
+    $args = array(
+        "label" => __( "Landing Page", "cybermark" ),
+        "labels" => $labels,
+        "description" => "Display your Landing Pages",
+        "public" => true,
+        "publicly_queryable" => true,
+        "show_ui" => true,
+        "show_in_rest" => false,
+        "rest_base" => "",
+        "has_archive" => false,
+        "show_in_menu" => true,
+        "show_in_nav_menus" => false,
+        "exclude_from_search" => true,
+        "capability_type" => "post",
+        "map_meta_cap" => true,
+        "hierarchical" => false,
+        "rewrite" => array( "slug" => "offer", "with_front" => false ),
+        "menu_position" => 0,
+        'menu_icon'   => 'dashicons-align-left',
+        "query_var" => true,
+        "supports" => array( "title", "editor", "thumbnail"),
+    );
+    register_post_type( "landing-pages", $args );
+}
+add_action( 'init', 'cpts_landing_page' );
+
+//Landing Page Options
+if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array(
+  'key' => 'group_5f5ba06ef35e0',
+  'title' => 'Landing Page Theme 1',
+  'fields' => array(
+    array(
+      'key' => 'field_5f5ba0dd321ac',
+      'label' => 'Banner Image',
+      'name' => 'banner_image',
+      'type' => 'image',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'return_format' => 'url',
+      'preview_size' => 'full',
+      'library' => 'all',
+      'min_width' => '',
+      'min_height' => '',
+      'min_size' => '',
+      'max_width' => '',
+      'max_height' => '',
+      'max_size' => '',
+      'mime_types' => '',
+    ),
+    array(
+      'key' => 'field_5f5ba22f321ad',
+      'label' => 'Banner H1',
+      'name' => 'banner_h1',
+      'type' => 'text',
+      'instructions' => 'Enter the H1 Heading here',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f5ba261321ae',
+      'label' => 'Banner H2',
+      'name' => 'banner_h2',
+      'type' => 'text',
+      'instructions' => 'Enter the H2 Heading here',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+  ),
+  'location' => array(
+    array(
+      array(
+        'param' => 'post_template',
+        'operator' => '==',
+        'value' => 'post-templates/single-landing-pages.php',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => array(
+    0 => 'the_content',
+    1 => 'excerpt',
+    2 => 'discussion',
+    3 => 'comments',
+    4 => 'revisions',
+    5 => 'slug',
+    6 => 'author',
+    7 => 'format',
+    8 => 'featured_image',
+    9 => 'categories',
+    10 => 'tags',
+    11 => 'send-trackbacks',
+  ),
+  'active' => true,
+  'description' => '',
+));
+
+acf_add_local_field_group(array(
+  'key' => 'group_5f627e19bcc9f',
+  'title' => 'Landing Page Theme 2',
+  'fields' => array(
+    array(
+      'key' => 'field_5f627e19cb1b0',
+      'label' => 'Banner Image',
+      'name' => 'banner_image',
+      'type' => 'image',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'return_format' => 'url',
+      'preview_size' => 'full',
+      'library' => 'all',
+      'min_width' => '',
+      'min_height' => '',
+      'min_size' => '',
+      'max_width' => '',
+      'max_height' => '',
+      'max_size' => '',
+      'mime_types' => '',
+    ),
+    array(
+      'key' => 'field_5f627e19d2b61',
+      'label' => 'Banner H1',
+      'name' => 'banner_h1',
+      'type' => 'text',
+      'instructions' => 'Enter the H1 Heading here',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e19da56e',
+      'label' => 'Supporting Statement Header',
+      'name' => 'supporting_statement_header',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+  ),
+  'location' => array(
+    array(
+      array(
+        'param' => 'post_template',
+        'operator' => '==',
+        'value' => 'post-templates/single-landing-page-two.php',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => array(
+    0 => 'the_content',
+    1 => 'excerpt',
+    2 => 'discussion',
+    3 => 'comments',
+    4 => 'revisions',
+    5 => 'slug',
+    6 => 'author',
+    7 => 'format',
+    8 => 'featured_image',
+    9 => 'categories',
+    10 => 'tags',
+    11 => 'send-trackbacks',
+  ),
+  'active' => true,
+  'description' => '',
+));
+
+acf_add_local_field_group(array(
+  'key' => 'group_5f627e1db9868',
+  'title' => 'Landing Page Theme 3',
+  'fields' => array(
+    array(
+      'key' => 'field_5f627e1dc1f3d',
+      'label' => 'Banner Image',
+      'name' => 'banner_image',
+      'type' => 'image',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'return_format' => 'url',
+      'preview_size' => 'full',
+      'library' => 'all',
+      'min_width' => '',
+      'min_height' => '',
+      'min_size' => '',
+      'max_width' => '',
+      'max_height' => '',
+      'max_size' => '',
+      'mime_types' => '',
+    ),
+    array(
+      'key' => 'field_5f627e1dc99c4',
+      'label' => 'Banner H1',
+      'name' => 'banner_h1',
+      'type' => 'text',
+      'instructions' => 'Enter the H1 Heading here',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e1dcd63b',
+      'label' => 'Banner H2',
+      'name' => 'banner_h2',
+      'type' => 'text',
+      'instructions' => 'Enter the H2 Heading here',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e1dd1328',
+      'label' => 'Supporting Statement Header',
+      'name' => 'supporting_statement_header',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e1dd507b',
+      'label' => 'Supporting Statement Footer',
+      'name' => 'supporting_statement_footer',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e1dd8cf0',
+      'label' => 'Footer H1',
+      'name' => 'footer_h1',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+  ),
+  'location' => array(
+    array(
+      array(
+        'param' => 'post_template',
+        'operator' => '==',
+        'value' => 'post-templates/single-landing-page-three.php',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => array(
+    0 => 'the_content',
+    1 => 'excerpt',
+    2 => 'discussion',
+    3 => 'comments',
+    4 => 'revisions',
+    5 => 'slug',
+    6 => 'author',
+    7 => 'format',
+    8 => 'featured_image',
+    9 => 'categories',
+    10 => 'tags',
+    11 => 'send-trackbacks',
+  ),
+  'active' => true,
+  'description' => '',
+));
+
+acf_add_local_field_group(array(
+  'key' => 'group_5f627e2195f13',
+  'title' => 'Landing Page Theme 4',
+  'fields' => array(
+    array(
+      'key' => 'field_5f627e21a203c',
+      'label' => 'Banner Image',
+      'name' => 'banner_image',
+      'type' => 'image',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'return_format' => 'url',
+      'preview_size' => 'full',
+      'library' => 'all',
+      'min_width' => '',
+      'min_height' => '',
+      'min_size' => '',
+      'max_width' => '',
+      'max_height' => '',
+      'max_size' => '',
+      'mime_types' => '',
+    ),
+    array(
+      'key' => 'field_5f627e21a9a77',
+      'label' => 'Banner H1',
+      'name' => 'banner_h1',
+      'type' => 'text',
+      'instructions' => 'Enter the H1 Heading here',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e21b145c',
+      'label' => 'Supporting Statement Header',
+      'name' => 'supporting_statement_header',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e21b5147',
+      'label' => 'Supporting Statement Footer',
+      'name' => 'supporting_statement_footer',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f627e21bcadc',
+      'label' => 'Footer H3',
+      'name' => 'footer_h3',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+  ),
+  'location' => array(
+    array(
+      array(
+        'param' => 'post_template',
+        'operator' => '==',
+        'value' => 'post-templates/single-landing-page-four.php',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => array(
+    0 => 'the_content',
+    1 => 'excerpt',
+    2 => 'discussion',
+    3 => 'comments',
+    4 => 'revisions',
+    5 => 'slug',
+    6 => 'author',
+    7 => 'format',
+    8 => 'featured_image',
+    9 => 'categories',
+    10 => 'tags',
+    11 => 'send-trackbacks',
+  ),
+  'active' => true,
+  'description' => '',
+));
+
+acf_add_local_field_group(array(
+  'key' => 'group_5f5a9c516e1e4',
+  'title' => 'Landing Page Theme Options',
+  'fields' => array(
+    array(
+      'key' => 'field_5f5a9ca6a29fd',
+      'label' => 'Header',
+      'name' => '',
+      'type' => 'tab',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'placement' => 'left',
+      'endpoint' => 0,
+    ),
+    array(
+      'key' => 'field_5f5a9d8c2bc44',
+      'label' => 'Header Options',
+      'name' => 'header_options',
+      'type' => 'radio',
+      'instructions' => 'Select from the following options for your header',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array(
+        'header_1' => 'Header 1: <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/header1.png">',
+        'header_2' => 'Header 2: <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/header2.png">',
+        'header_3' => 'Header 3: <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/header4.png">',
+        'header_4' => 'Header 4: Blank Header',
+      ),
+      'allow_null' => 0,
+      'other_choice' => 0,
+      'default_value' => '',
+      'layout' => 'vertical',
+      'return_format' => 'value',
+      'save_other_choice' => 0,
+    ),
+    array(
+      'key' => 'field_5f5a9d75a29fe',
+      'label' => 'Footer',
+      'name' => '',
+      'type' => 'tab',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'placement' => 'top',
+      'endpoint' => 0,
+    ),
+    array(
+      'key' => 'field_5f5aa9666fb35',
+      'label' => 'Footer Options',
+      'name' => 'footer_options',
+      'type' => 'radio',
+      'instructions' => 'Select from the following options for your footer',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array(
+        'footer_1' => 'Footer 1: <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/footer1.png">',
+        'footer_2' => 'Footer 2:<img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/footer2.png">',
+        'footer_3' => 'Footer 3: <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/footer3.png">',
+        'footer_4' => 'Footer 4:<img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/footer4.png">',
+      ),
+      'allow_null' => 0,
+      'other_choice' => 0,
+      'default_value' => '',
+      'layout' => 'vertical',
+      'return_format' => 'value',
+      'save_other_choice' => 0,
+    ),
+    array(
+      'key' => 'field_5f80a5633ff44',
+      'label' => 'Testimonial',
+      'name' => '',
+      'type' => 'tab',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'placement' => 'top',
+      'endpoint' => 0,
+    ),
+    array(
+      'key' => 'field_5f80a58f3ff45',
+      'label' => 'Testimonial Options',
+      'name' => 'testimonial_options',
+      'type' => 'radio',
+      'instructions' => 'Select from the following options for your footer',
+      'required' => 0,
+      'conditional_logic' => 0,
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'choices' => array(
+        'testimonial_1' => 'Testimonial 1:  <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/testimonial-1.png">',
+        'testimonial_2' => 'Testimonial 2: <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/testimonial-2.png">',
+        'testimonial_3' => 'Testimonial 3: <img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/testimonial-3.png">',
+        'testimonial_4' => 'Testimonial 4:<img src="http://staging.cybermark.com/mktpltfrm/wp-content/uploads/2020/09/testimonial-4.png">',
+      ),
+      'allow_null' => 0,
+      'other_choice' => 0,
+      'default_value' => '',
+      'layout' => 'vertical',
+      'return_format' => 'value',
+      'save_other_choice' => 0,
+    ),
+    array(
+      'key' => 'field_5f9b3f092a0d5',
+      'label' => 'Footer H1',
+      'name' => 'footer_h1',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => array(
+        array(
+          array(
+            'field' => 'field_5f5aa9666fb35',
+            'operator' => '==',
+            'value' => 'footer_3',
+          ),
+        ),
+      ),
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+    array(
+      'key' => 'field_5f9b3fd44d683',
+      'label' => 'Footer H3',
+      'name' => 'footer_h3',
+      'type' => 'text',
+      'instructions' => '',
+      'required' => 0,
+      'conditional_logic' => array(
+        array(
+          array(
+            'field' => 'field_5f5aa9666fb35',
+            'operator' => '==',
+            'value' => 'footer_3',
+          ),
+        ),
+      ),
+      'wrapper' => array(
+        'width' => '',
+        'class' => '',
+        'id' => '',
+      ),
+      'default_value' => '',
+      'placeholder' => '',
+      'prepend' => '',
+      'append' => '',
+      'maxlength' => '',
+    ),
+  ),
+  'location' => array(
+    array(
+      array(
+        'param' => 'post_type',
+        'operator' => '==',
+        'value' => 'landing-pages',
+      ),
+    ),
+  ),
+  'menu_order' => 0,
+  'position' => 'normal',
+  'style' => 'default',
+  'label_placement' => 'top',
+  'instruction_placement' => 'label',
+  'hide_on_screen' => '',
+  'active' => true,
+  'description' => '',
+));
+
+endif;
+
+//Add theme options to stylesheet
+function hook_css() {
+    $primary_color = get_field('primary_color', 'option');
+    $secondary_color= get_field('secondary_color', 'option');
+      $link_color = get_field('link_color', 'option');
+      $link_hover_color = get_field('link_hover_color', 'option');
+      $body_font_color = get_field('body_font_color', 'option');
+      $h1_color = get_field('h1_color', 'option');
+      $h2_color = get_field('h2_color', 'option');
+      $h3_color = get_field('h3_color', 'option');
+      $h4_color = get_field('h4_color', 'option');
+      $h5_color = get_field('h5_color', 'option');
+      $h6_color = get_field('h6_color', 'option');
+  ?>
+            <style>
+              :root{
+                --primary-color: <?php echo $primary_color;?>;
+            --secondary-color: <?php echo $secondary_color;?>;
+            --link-color: <?php echo $link_color;?>;
+            --link-hover-color: <?php echo $link_hover_color;?>;
+            --body-font-color: <?php echo $body_font_color;?>;
+            --h1-color: <?php echo $h1_color;?>;
+            --h2-color: <?php echo $h2_color;?>;
+            --h3-color: <?php echo $h3_color;?>;
+            --h4-color: <?php echo $h4_color;?>;
+            --h5-color: <?php echo $h5_color;?>;
+            --h6-color: <?php echo $h6_color;?>;
+          }
+          a {color: <?php echo $link_color;?>;}
+          a:hover {color: <?php echo $link_hover_color;?>;}
+          body {color: <?php echo $body_font_color;?>;}
+          h1 {color: <?php echo $h1_color;?>;}
+          h2 {color: <?php echo $h2_color;?>;}
+          h3 {color: <?php echo $h3_color;?>;}
+          h4 {color: <?php echo $h4_color;?>;}
+          h5 {color: <?php echo $h5_color;?>;}
+          h6 {color: <?php echo $h6_color;?>;}
+      </style>
+      <?php
+    }
+    add_action('wp_head', 'hook_css');

@@ -1,0 +1,252 @@
+/*
+Theme Name: CyberMark Portfolio Theme
+Author: CyberMark
+Author URI: https://www.cybermark.com
+Version: 1.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cybermark-portfolio
+Template: cybermark
+*/
+body {
+
+}
+@media only screen and (min-width: 1399px)  {
+.container {
+    max-width: 1370px;
+}
+}
+.container {
+	max-width: 100%;
+}
+h2 {
+    font-size: 3rem;
+}
+#header_2 {
+    background: #000;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    top: 2em;
+    padding: 5px 0;
+        padding-right: 0px;
+    left: 2em;
+    padding-right: 2em;
+}
+#header_2.sticky {
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 5px 0;
+}
+.main-navigation ul ul li {
+    background-color: #000;
+    border-color: #000;
+}
+
+.main-banner {
+    background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgba(0,0,0,0) 75%), url(assets/images/portfolio-bg.jpg);
+    height: 100vh;
+    min-height: 700px;
+display: flex;
+}
+.main-banner__wrapper {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+.main-navigation a {
+    color: #FFF;
+}
+#site-header-menu .header-button .btn {
+    color: #FFF;
+}
+.heading-block .h {
+    font-size: 72px;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+.page__banner-inner {
+    padding: 20rem 0 15rem;
+}
+.section__wrapper {
+    padding: 75px 0;
+}
+.section_img_wrapper {
+    margin-right: -15vw;
+}
+.flex-row-reverse .section_img_wrapper {
+    margin-left: -15vw;
+    margin-right: 0;
+}
+.blog #content, .post-template-default #content {
+    margin-top: 15em;
+}
+@media only screen and (max-width: 767px){
+.section_img_wrapper, .flex-row-reverse .section_img_wrapper {
+    margin-left: 0;
+    margin-right: 0;
+}	
+}
+#home-feature {
+    margin-top: -7em;
+    padding: 0;
+}
+#home-feature .container {
+    width: 100%;
+    max-width: 100%;
+}
+#home-feature.feature_2 .column .column-img {
+    max-width: 100%;
+    margin: 0;
+}
+#home-feature [class*="col-"] {
+    padding: 0;
+}
+#home-feature.feature_2 .column {
+    text-align: center;
+    overflow: hidden;
+    margin: 0;
+}
+#home-feature.feature_2 .column .column-text {
+    transform: translateY(100%);
+    -webkit-transition: transform 0.5s ease-out;
+    -o-transition: transform 0.5s ease-out;
+    transition: transform 0.5s ease-out;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    line-height: 100%;
+    padding: 0 4em;
+    background-color: rgba(0,0,0,.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#home-feature.feature_2 .column:hover .column-text {
+    transform: translateY(0);
+}
+
+#home-feature.feature_2 .column .column-text h3 {
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: 300;
+    font-size: 3rem;
+}
+#home-feature.feature_2 .column .column-text p {
+    color: #FFF;
+    line-height: 1.4;
+}
+
+
+.column-text h3 {
+    font-weight: 300;
+    color: #000;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+}
+.gallery_2 .slick-next {
+    right: 0;
+}
+.gallery_2 .slick-prev {
+    left: 0;
+}
+
+.blog-posts__wrapper {
+    padding: 0 5em;
+}
+#footer_1 {
+    background: #000;
+    color: #FFF;
+}
+#footer_1 a, #footer_1 p {
+    color: #FFF;
+}
+#featured {
+    background-color: var(--secondary-color);
+    color: #FFF;
+    transform: scale(1.1);
+}
+#home-testimonials {
+    background: url(assets/images/testimonials-bg.jpg);
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-size: auto;
+    background-position: center center;
+    background-size: cover;
+        height: 100vh;
+min-height: 700px;
+    color: #fff;
+    display: flex;
+justify-content: center;
+padding: 0 5em;
+}
+#home-testimonials blockquote, #home-testimonials .testimonial-author {
+    color: #FFF;
+}
+#home-testimonials .slick-arrow svg {
+    fill: white;
+}
+#home-testimonials .container {
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.testimonial_2.section__wrapper {
+    padding-left: 5em;
+    padding-right: 5em;
+}
+#content-1 {
+    background-image: url(assets/images/content-1.jpg);
+    height: 100vh;
+min-height: 700px;
+display: flex;
+background-size: cover;
+position: relative;
+}
+#content-1::before, #content-2::before {
+    background-color: black;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+}
+#content-2 {
+    background-image: url(assets/images/content-2.jpg);
+    height: 100vh;
+min-height: 700px;
+background-size: cover;
+position: relative;
+display: flex;
+margin-top: -5em;
+}
+
+#content-1 .row, #content-2 .row {
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+#content-1 div.section__content {
+    padding: 25px;
+    background-color: #000;
+    color: #FFF;
+}
+#content-1 div.section__content h2, #content-1 div.section__content h3, #content-2 div.section__content h2, #content-2 div.section__content h3 {
+	color: #FFF;
+}
+#content-2 div.section__content {
+    padding: 25px;
+    background-color: #000;
+    color: #FFF;
+}

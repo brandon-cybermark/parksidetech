@@ -33,22 +33,24 @@
 	</header><!-- .entry-header -->
 
 	<?php if ( '' !== get_the_post_thumbnail() ) : ?>
+	<div class="featured_img">
 		<div class="post-thumbnail">
 			<a href="<?php the_permalink(); ?>">
 				<?php the_post_thumbnail( 'cybermark-featured-image' ); ?>
 			</a>
 		</div><!-- .post-thumbnail -->
-	<?php endif; 
-	if ( 'post' === get_post_type() ) {
-			echo '<div class="entry-meta">';
-			if ( is_single() ) {
-				cybermark_posted_on();
-			} else {
-				echo cybermark_time_link();
-				cybermark_edit_link();
-			};
-			echo '</div><!-- .entry-meta -->';
-		};?>
+		<div class="meta clr">
+			<span class="meta-cat"><?php the_category( ' / ', get_the_ID() ); ?></span>
+		</div>
+	</div>
+	<?php endif; ?>
+	<header class="blog-entry-header clr">
+					<div class="meta clr">
+						<span class="meta-date"><?php echo get_the_date(); ?></span>
+						<span class="meta-auth"><?php echo get_the_author(); ?></span>
+					</div>
+				
+				</header><!-- .blog-entry-header -->
 
 	<div class="entry-content">
 		<?php

@@ -78,11 +78,20 @@ $table_prefix = 'cm_website_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define('WP_DEBUG', true);
-define( 'WP_DEBUG_DISPLAY', false );
+define( 'WP_DEBUG_DISPLAY', true );
 define('WP_MEMORY_LIMIT', '512M');
 define('ALLOW_UNFILTERED_UPLOADS', true);
 define('FS_METHOD','direct');
 define( 'DISALLOW_FILE_EDIT', true );
+
+define('WP_ALLOW_MULTISITE', true);
+define('MULTISITE', true);
+define('SUBDOMAIN_INSTALL', false);
+define('DOMAIN_CURRENT_SITE', 'localhost');
+define('PATH_CURRENT_SITE', '/smb-template/');
+define('SITE_ID_CURRENT_SITE', 1);
+define('BLOG_ID_CURRENT_SITE', 1);
+
 
 //Define What Converts For Brand
 define('wc_key', '9-041940e9597cf124');

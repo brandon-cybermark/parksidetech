@@ -25,11 +25,11 @@ function cybermark_register_required_plugins() {
 
 	$plugins = array(
 		array(
-			'name'               => 'Website Platform', 
-			'slug'               => 'website-platform', 
-			'source'             => get_template_directory() . '/lib/plugins/website-platform.zip', 
+			'name'               => 'Franchise Platform', 
+			'slug'               => 'franchise-platform', 
+			'source'             => get_template_directory() . '/lib/plugins/franchise-platform.zip', 
 			'required'           => true, 
-			'version'            => '1.0.0', 
+			'version'            => '2.0.0', 
 			'force_activation'   => true, 
 			'force_deactivation' => true, 
 			'external_url'       => '', 
@@ -40,9 +40,31 @@ function cybermark_register_required_plugins() {
 			'slug'               => 'cybermark-plugin', // The plugin slug (typically the folder name).
 			'source'             => get_template_directory() . '/lib/plugins/cybermark-plugin.zip', // The plugin source.
 			'required'           => true, 
-			'version'            => '1.0.0', 
+			'version'            => '2.0.0', 
 			'force_activation'   => true, 
 			'force_deactivation' => true, 
+			'external_url'       => '', 
+			'is_callable'        => '', 
+		),
+		array(
+			'name'               => 'My Sites Search', 
+			'slug'               => 'my-sites-search-master', 
+			'source'             => get_template_directory() . '/lib/plugins/my-sites-search-master.zip', 
+			'required'           => true, 
+			'version'            => '',
+			'force_activation'   => false, 
+			'force_deactivation' => false,
+			'external_url'       => '', 
+			'is_callable'        => '', 
+		),
+		array(
+			'name'               => 'Admin Menu Editor Pro', // The plugin name.
+			'slug'               => 'admin-menu-editor-pro', // The plugin slug (typically the folder name).
+			'source'             => get_template_directory() . '/lib/plugins/admin-menu-editor-pro.zip', // The plugin source.
+			'required'           => true, 
+			'version'            => '',
+			'force_activation'   => false, 
+			'force_deactivation' => false,
 			'external_url'       => '', 
 			'is_callable'        => '', 
 		),
@@ -80,11 +102,59 @@ function cybermark_register_required_plugins() {
 			'is_callable'        => '', 
 		),
 		array(
-			'name'      => 'Yoast',
+			'name'               => 'WP Defender', 
+			'slug'               => 'wp-defender', 
+			'source'             => get_template_directory() . '/lib/plugins/wp-defender.zip', 
+			'required'           => true, 
+			'version'            => '',
+			'force_activation'   => false, 
+			'force_deactivation' => false,
+			'external_url'       => '', 
+			'is_callable'        => '', 
+		),
+		array(
+			'name'               => 'Beehive', 
+			'slug'               => 'google-analytics-async', 
+			'source'             => get_template_directory() . '/lib/plugins/google-analytics-async.zip', 
+			'required'           => true, 
+			'version'            => '',
+			'force_activation'   => false, 
+			'force_deactivation' => false,
+			'external_url'       => '', 
+			'is_callable'        => '', 
+		),
+		array(
+			'name'               => 'AME Branding Add On', 
+			'slug'               => 'ame-branding-add-on', 
+			'source'             => get_template_directory() . '/lib/plugins/ame-branding-add-on.zip', 
+			'required'           => true, 
+			'version'            => '',
+			'force_activation'   => false, 
+			'force_deactivation' => false,
+			'external_url'       => '', 
+			'is_callable'        => '', 
+		),
+		array(
+			'name'      => 'Yoast SEO',
 			'slug'      => 'wordpress-seo',
-			'required'  => false,
+			'required'  => true,
+		),
+		array(
+			'name'      => 'NS Cloner – Site Copier',
+			'slug'      => 'ns-cloner-site-copier',
+			'required'  => true,
+		),
+		array(
+			'name'      => 'WordPress Importer',
+			'slug'      => 'wordpress-importer',
+			'required'  => true,
 		),
 
+		array(
+			'name'      => 'ACF Content Analysis for Yoast SEO ',
+			'slug'      => 'acf-content-analysis-for-yoast-seo',
+			'required'  => true,
+		),
 
 
 	);

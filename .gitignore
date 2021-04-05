@@ -18,3 +18,9 @@ node_modules/
 *.log
 *.sql
 *.sqlite
+wp-config.php
+wp-content/uploads/*
+!wp-content/uploads/.htaccess
+.htaccess
+*.debug.html
+.user.init

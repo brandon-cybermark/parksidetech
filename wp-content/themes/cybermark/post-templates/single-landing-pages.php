@@ -10,124 +10,103 @@ get_header(); ?>
 	<div class="container">
 		<div class="page-banner-heading-1">
 			<h1 id="4" class=""><?php echo do_shortcode(get_field('banner_h1'));?></h1>
-            <h2><?php if(get_field('banner_h2')):?><?php echo do_shortcode(get_field('banner_h2'));?><?php else:?>Subheading<?php endif;?></h2>
-                <div class="form_one" >
-                <?php gravity_form( 4, $display_title = false, $display_description = false );?>
-                </div>
+            <?php if(get_field('banner_h2')):?><h2><?php echo do_shortcode(get_field('banner_h2'));?></h2><?php endif;?>
+            <div class="form_one" >
+                <?php echo do_shortcode(get_field('form_shortcode'));?>
+            </div>
 		</div>
 	</div>
 </div>
 
 <div class="section__wrapper" style="position: relative;">
-<div class="container" style="position: relative;">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="row ">
-                
-                <div class="col-sm-6 info">
-                    <h4>CyberMark</h4>
-                    <p>18456 N 25 Ave</p>
-                    <p>Phoenix, AZ, 85023</p>
-                    <p>623-555-1235</p>
-                    <a href="#4" class="btn primary">Directions</a>
-                </div>
-                <div class="col-sm-6 hours ">
-                    <h4>Hours</h4>
-                    <p>Monday: 8am - 6pm</p>
-                    <p>Tuesday: 8am - 6pm</p>
-                    <p>Wednesday: 8am - 6pm</p>
-                    <p>Thursday: 8am - 6pm</p>
-                    <p>Friday: 8am - 6pm</p>
-                    <p>Saturday: 8am - 6pm</p>
-                    <p>Sunday: 8am - 6pm</p>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</div>
-<div class="map-wrapper">
-    <div><iframe scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=700&amp;hl=en&amp;q=18456%20N%2025%20Ave,%20Phoenix%20AZ+(CyberMark)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="300" frameborder="0"></iframe></div>
-        </div>
-
- 
-
-</div>
-
-<div class="section__wrapper" id="about">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="content__img">
-                    <img src="https://www.cowgirlcontractcleaning.com/wp-content/uploads/sites/360/2018/05/placeholder-img-2.jpg" alt="" srcset="" class="cover">
+    <div class="container" style="position: relative;">
+        <div class="row">
+            <div class="col-lg-6 pt-3 pb-3">
+                <div class="row ">
+                    <div class="col-sm-6">
+                        <span class="h2"><?php the_field('business_name','option');?></span>
+                        <div class="contact__details">
+                            <?php 
+                            $address = get_field('address','option');
+                            $city = get_field('city','option');
+                            $state = get_field('state','option');
+                            $zip_code = get_field('zip_code','option');
+                            $phone_number = get_field('phone_number','option');?>
+                            <span class="details d-block"><?php echo $address;?><br/><?php echo $city;?>, <?php echo $state;?>. <?php echo $zip_code;?></span>
+                            <span class="details d-block"><?php echo $phone_number;?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="h2">Hours</span>
+                        <span class="hours">
+                            <?php if(get_field('hours_monday','options')):?><span>Monday: <?php the_field('hours_monday','options');?></span><?php endif;?>
+                            <?php if(get_field('hours_tuesday','options')):?><span>Tuesday: <?php the_field('hours_tuesday','options');?></span><?php endif;?>
+                            <?php if(get_field('hours_wednesday','options')):?><span>Wednesday: <?php the_field('hours_wednesday','options');?></span><?php endif;?>
+                            <?php if(get_field('hours_thursday','options')):?><span>Thursday: <?php the_field('hours_thursday','options');?></span><?php endif;?>
+                            <?php if(get_field('hours_friday','options')):?><span>Friday: <?php the_field('hours_friday','options');?></span><?php endif;?>
+                            <?php if(get_field('hours_saturday','options')):?><span>Saturday: <?php the_field('hours_saturday','options');?></span><?php endif;?>
+                            <?php if(get_field('hours_sunday','options')):?><span>Sunday: <?php the_field('hours_sunday','options');?></span><?php endif;?>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="content__container">
-                    <h2>About <?php the_field('business_name', 'option'); ?></h2>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid recusandae explicabo ab! Maiores placeat quis expedita quasi, suscipit odio facere earum, sit saepe iusto eum esse repellat officia rerum debitis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit corrupti maxime qui dolorem culpa quasi ipsa saepe delectus ex eligendi, voluptas sed quia commodi molestiae eaque sapiente quis voluptatem beatae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aliquam deleniti nemo sunt perferendis voluptate officia dolorem eaque saepe. Placeat deserunt cupiditate, consectetur dolores tempore animi aspernatur eaque dignissimos eligendi.</p>
-                    <a href="#4" class="btn secondary">Editable CTA</a>
+            <div class="col-lg-6">
+                <div class="map-wrapper">
+                    <div>
+                        <?php the_field('map_iframe');?>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="section__wrapper dk-bg">
-    <div class="container ">
-        <div class="row align-items-center">
-            <div class="col-md-4 benefits ">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div class="p-2 mb-2"><i class="fas fa-rocket fa-3x"></i></div>
-                       <div class="p-2"><h5 class="card-title"><strong>Benefit or Feature</strong></h5></div> 
-                       <div> <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p></div>
 
-                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 benefits">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div class="p-2 mb-2"><i class="fas fa-rocket fa-3x"></i></div>
-                       <div class="p-2"><h5 class="card-title"><strong>Benefit or Feature</strong></h5></div> 
-                       <div> <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p></div>
 
-                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 benefits">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <div class="p-2 mb-2"><i class="fas fa-rocket fa-3x"></i></div>
-                       <div class="p-2"><h5 class="card-title"><strong>Benefit or Feature</strong></h5></div> 
-                       <div> <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p></div>
+<div class="wrap">
+    <?php
+    if (have_rows('page_builder')) :
+    while (have_rows('page_builder')) :
+        $label = get_field_object('page_builder');
+        the_row();
+        switch (get_row_layout()) {
+            case 'intro_section':
+                get_template_part('partials/intro');
+                break;
+            case 'content_section':
+                get_template_part('partials/content');
+                break;
+            case 'gallery_section':
+                get_template_part('partials/gallery');
+                break;
+            case 'features_section':
+                get_template_part('partials/features');
+                break;
+            case 'team_section':
+                get_template_part('partials/team');
+                break;
+            case 'pricing_section':
+                get_template_part('partials/pricing');
+                break;
+            case 'testimonial_section':
+                get_template_part('partials/testimonial');
+                break;
+            case 'contact_section':
+                get_template_part('partials/contact');
+                break;
+            case 'blog_section':
+                get_template_part('partials/blog');
+                break;
+            case 'pricing_tables':
+                get_template_part('partials/pricing');
+                break;
+            case 'faq_section':
+                get_template_part('partials/faq');
+                break;
+        } //end switch
+    endwhile;
+endif;?>
 
-                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<?php 
-      
-    get_template_part('template-parts/testimonials');
-?>
-
-<div class="section__wrapper ">
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-12 text-center">
-                <h2>Editable Offer</h2>
-                <p>Click the button below to claim this offer!</p>
-                <a href="#4" class="btn secondary">Editable CTA</a>
-            </div>
-        </div>
-    </div>
-</div>
-
- 
-  </div>
-</div>
+</div><!-- .wrap -->
 
 <?php
 get_footer();

@@ -2754,3 +2754,18 @@ function lp_css() {
     echo '</style>';
   }
 }
+
+//Add list of locations to corporate dashboard
+add_action('admin_menu', 'cybermark_all_locations');
+function cybermark_all_locations() {
+    $page_title = 'All Locations';
+    $menu_title = 'All locations';
+    $capability = 'read';
+    $menu_slug = 'all_locations';
+    $function = 'all_locations';
+    $position = 3;
+    add_submenu_page( 'cybermark_page', $page_title, $menu_title, $capability, $menu_slug, $function, $position );
+}
+function all_locations() {
+    include 'inc/all-locations.php';
+}

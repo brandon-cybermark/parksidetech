@@ -1,5 +1,5 @@
 <?php
-require('http://'.DOMAIN_CURRENT_SITE.PATH_CURRENT_SITE.'wp-load.php');
+require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
 global $wpdb;
 global $blog_id; 
 	$today = date('Y-m-d');

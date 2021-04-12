@@ -146,11 +146,9 @@ foreach ( (array) $blogs as $details ) {
                    $holding_ar = array(
                        'loc_name' => $loc_name,
                        'loc_url'=> site_url(),
-                       'loc_status'=> get_field('template','options'),
                        'loc_id' =>  $temp_id,
 
                        'loc_phone'=> get_field('phone_number','options'),
-				               'loc_email'=> get_field('location_email',7),
                        'loc_address' => get_field('address','options'),
                        'loc_city'=> get_field('city','options'),
                        'loc_zip'=> get_field('zip_code','options'),
@@ -233,13 +231,10 @@ foreach ( (array) $blogs as $details ) {
                    <tr>
                      <th>Location Name</th>
                      <th>Site URL</th>
-                     <th>Website Template</th>
                      <th>Phone Number</th>
                      <th>Address</th>
                      <th>Social Media Links</th>
                      <th>Hours of Operation</th>
-                     <th>Coordinates</th>
-                     <th>Email</th>
                    </tr>
                </thead>
 
@@ -249,13 +244,10 @@ foreach ( (array) $blogs as $details ) {
                    <tr>
                      <th>Location Name</th>
                      <th>Site URL</th>
-                     <th>Website Template</th>
                      <th>Phone Number</th>
                      <th>Address</th>
                      <th>Social Media Links</th>
                      <th>Hours of Operation</th>
-                     <th>Coordinates</th>
-                     <th>Email</th>
                    </tr>
                </tfoot>
 
@@ -269,7 +261,6 @@ foreach ( (array) $blogs as $details ) {
                       echo '<tr>';
                       echo '<td>'.$loc_data[$key][$key2]['loc_name'].'</td>';
                       echo '<td>'.$loc_data[$key][$key2]['loc_url'].'</td>';
-                      echo '<td>'.$loc_data[$key][$key2]['loc_status'].'</td>';
                       echo '<td>'.$loc_data[$key][$key2]['loc_phone'].'</td>';
                       echo '<td>'.$loc_data[$key][$key2]['loc_address'].
                       '<br>'.$loc_data[$key][$key2]['loc_city'].
@@ -291,10 +282,6 @@ foreach ( (array) $blogs as $details ) {
                       <br>SAT: '.$loc_data[$key][$key2]['loc_sat'].'
                       <br>SUN: '.$loc_data[$key][$key2]['loc_sun'].'
                       </td>';
-                      echo '<td>LAT:'.$loc_data[$key][$key2]['loc_lat'].'| LON:'.$loc_data[$key][$key2]['loc_lon'].'</td>';
-                      echo '<td>'.$loc_data[$key][$key2]['email'].'</td>';
-
-                      echo '</pre></td>';
 
                       echo '</tr>';
                     }

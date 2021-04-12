@@ -23,26 +23,7 @@ $user = wp_get_current_user();
     		<div class="row">
     			<div class="col-xl-6">
     				<div class="block__wrapper">
-		    			<div class="block block-rounded color_a">
-		    				<a href="<?php echo admin_url();?>admin.php?page=franchise-settings">
-								<div class="block-content p-0 text-center">
-									<div class="block-content-icon">
-										<div>
-											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 269 264" style="enable-background:new 0 0 269 264;" xml:space="preserve"><style type="text/css">.st0{fill:none;stroke:#000;stroke-width:10;stroke-miterlimit:10}</style><g> <g> <g> <line class="st0" x1="134.8" y1="50" x2="134.8" y2="60"/> <polyline class="st0" points="134.8,105 134.8,70 119.8,70 			"/> <line class="st0" x1="119.8" y1="105" x2="149.8" y2="105"/> </g> <path class="st0" d="M202.3,81.2c0,37.3-30.2,67.5-67.5,67.5c-37.3,0-67.5-30.2-67.5-67.5c0-37.3,30.2-70,67.5-70 C172.1,11.2,202.3,44,202.3,81.2z"/> </g> <path class="st0" d="M215.1,41.5h31.4c6.9,0,12.5,5.6,12.5,12.5v146.2c0,6.9-5.6,12.5-10,12.5H24c-9.4,0-15-5.6-15-12.5V54 c0-6.9,5.6-12.5,12.5-12.5h37.9"/> <rect x="104.8" y="213.8" class="st0" width="60" height="40"/> <line class="st0" x1="77.3" y1="253.8" x2="189.8" y2="253.8"/> <line class="st0" x1="259.8" y1="183.8" x2="9.8" y2="183.8"/> </g> </svg>
-										</div>
-									</div>
-									<div class="small-block-content">
-										<div class="block-header block-header-default p-0">
-											<h3 class="block-title">Franchise Settings</h3>
-										</div>
-										<div class="block-content-details">
-											<p>Access website settings</p>
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-		    			<div class="block block-rounded color_b">
+		    			<div class="block block-rounded color_b" style="width: 100%">
 		    				<a href="<?php echo admin_url();?>admin.php?page=lead_tracking">
 								<div class="block-content p-0 text-center">
 									<div class="block-content-icon">

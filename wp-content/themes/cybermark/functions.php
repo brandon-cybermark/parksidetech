@@ -248,7 +248,7 @@ require get_parent_theme_file_path( '/inc/icon-functions.php' );
 //CyberMark Custom Functions
 // Load Bootstrap JS and Slick Slider JS
 function themebs_enqueue_scripts() {
-	wp_enqueue_script( 'main-all', get_theme_file_uri( '/assets/js/main-min.js' ), array(), '1.0.0' );
+	wp_enqueue_script( 'main-all', get_theme_file_uri( '/assets/js/main-all.js' ), array(), '1.0.0' );
 }
 add_action( 'wp_footer', 'themebs_enqueue_scripts');
 

@@ -141,11 +141,7 @@ add_action( 'wp_head', 'cybermark_javascript_detection', 0 );
  */
 function cybermark_scripts() {
 	// Load Bootstrap and Fontawesome
-  	wp_enqueue_style( 'aos', get_template_directory_uri() . '/assets/css/aos.css');
-  	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
-  	wp_enqueue_style('font-awesome', get_template_directory_uri() . '/assets/css/all.min.css'); 
-	wp_enqueue_style( 'cybermark-style', get_template_directory_uri() . '/style.css' , 99 );
-	wp_enqueue_style( 'corporate-style', get_stylesheet_uri(), 99 );
+  	wp_enqueue_style( 'all-style-min', get_template_directory_uri() . '/assets/css/all-style-min.css');
 	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 	wp_enqueue_script( 'cybermark-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
 	$cybermark_l10n = array(
@@ -252,14 +248,7 @@ require get_parent_theme_file_path( '/inc/icon-functions.php' );
 //CyberMark Custom Functions
 // Load Bootstrap JS and Slick Slider JS
 function themebs_enqueue_scripts() {
-  wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array( 'jquery' ) );
-  wp_enqueue_script( 'slick', get_template_directory_uri() . '/assets/js/slick.min.js', array( 'jquery' ) );
-  wp_enqueue_script( 'aos', get_template_directory_uri(). '/assets/js/aos.js', array( 'jquery' ));
-  wp_enqueue_script( 'fancybox-js', get_template_directory_uri(). '/assets/js/jquery.fancybox.pack.js', array( 'jquery' ));
-  wp_enqueue_script( 'fancybox-media', get_template_directory_uri(). '/assets/js/jquery.fancybox-media.js', array( 'jquery' ));
-	// Load the html5 shiv.
-	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
-	wp_enqueue_script( 'main', get_theme_file_uri( '/assets/js/main.js' ), array(), '1.0.0' );
+	wp_enqueue_script( 'main-all', get_theme_file_uri( '/assets/js/main-min.js' ), array(), '1.0.0' );
 }
 add_action( 'wp_footer', 'themebs_enqueue_scripts');
 

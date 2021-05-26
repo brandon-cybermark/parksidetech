@@ -1,0 +1,252 @@
+/*
+Theme Name: Parkside Tech
+Author: Elevative Digital Marketing
+Author URI: https://www.elevativedigital.com
+Version: 1.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: parksidetech
+Template: elevative
+*/
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Exo:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+
+body {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Exo', sans-serif;
+}
+@media only screen and (min-width: 1399px)  {
+.container {
+    max-width: 1470px;
+}
+}
+.btn {
+	    font-family: 'Orbitron', sans-serif;
+}
+
+
+.btn.round-btn {
+  width: 75px;
+  height: 75px;
+  border-radius: 50px;
+  transition: width .5s ease;
+  text-indent: -9999px;
+  line-height: 50px;
+}
+
+.btn.round-btn::after {
+  width: auto;
+  height: auto;
+  content: "";
+  border: 3px solid var(--primary-color);
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50px;
+}
+
+.btn.round-btn::before {
+  background-image: url(assets/images/arrow.svg);
+  z-index: 1;
+  transform: none;
+  background-color: transparent;
+  background-size: 40px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+
+.btn.round-btn:hover {
+  width: 300px;
+  text-indent: 0;
+  border-radius: 50px;
+}
+
+.btn.round-btn:hover::before {
+  background-image: none;
+}
+
+.btn.round-btn span { white-space: nowrap; transition: all ease .5s; opacity: 0; font-size: 16px; line-height: 20px; transition: all ease .5s;}
+.btn.round-btn:hover span{ opacity: 1; transition-delay:.7s;  transition: all ease .5s; }
+.btn.primary-btn {
+    border-radius: 50px;
+}
+
+.btn.primary-btn::before {
+    border-radius: 50px;
+}
+.btn.secondary-btn {
+    border-radius: 50px;
+}
+
+.btn.secondary-btn::before {
+    border-radius: 50px;
+}
+/*Header*/
+.header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 110;
+    background-color: transparent;
+}
+.header.sticky {
+	background-color: var(--secondary-color);
+}
+.main-logo img {
+    width: 200px;
+}
+.site-header-menu {
+    justify-content: center;
+}
+.main-navigation a {
+    color: #FFF;
+    font-family: 'Roboto Condensed', sans-serif;
+    letter-spacing: 0;
+    font-weight: 700;
+    font-size: 18px;
+
+}
+
+
+/*Hero*/
+.heading-block .h.h1 {
+    text-align: center;
+    font-size: 100px;
+    line-height: 1;
+    font-family: 'Exo', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+}
+.heading-block .h.h3 {
+    text-align: center;
+    font-size: 24px;
+    line-height: 36px;
+}
+.heading-block .h.h3.d-block strong {
+    display: block;
+    font-family: 'Exo', sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 48px;
+}
+.main-banner {
+    background: url(assets/images/hero-image.webp);
+}
+
+
+.background {
+    background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  overflow: hidden;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  height: 130vh;
+  position: fixed;
+  width: 100%;
+  transform: translateY(30vh);
+  transition: all 1.2s cubic-bezier(0.22, 0.44, 0, 1);
+}
+
+.background:first-child {
+  background-image: url(assets/images/hero-image.webp);
+  transform: translateY(-15vh);
+    background-color: #072539;
+}
+.background:first-child .content-wrapper {
+  transform: translateY(0)!important;
+}
+.background:nth-child(2) {
+    background-image: url(assets/images/manage-it.webp);
+    background-size: 50%;
+    background-position: 80% bottom;
+    background-color: #FFF;
+}
+.background:nth-child(3) {
+    background-image: url(assets/images/why-choose-us.webp);
+    background-color: #21a800;
+    background-position: contain;
+    background-position: left bottom;
+    background-size: 100%;
+}
+.background:nth-child(4) {
+    background-image: url(assets/images/services-bg.webp);
+    background-color: #fff;
+    background-position: 90% center;
+    background-size: 50%;
+}
+.background:nth-child(5) {
+    background-image: url(assets/images/testimonials-bg.webp);
+    background-color: #fff;
+    background-position: 90% 1%;
+    background-size: 40%;
+}
+.background:nth-child(6) {
+    background-color: #fff;
+}
+/* Set stacking context of slides */
+.background:nth-child(1) {
+  z-index: 6;
+}
+
+.background:nth-child(2) {
+  z-index: 5;
+}
+
+.background:nth-child(3) {
+  z-index: 4;
+}
+.background:nth-child(4) {
+  z-index: 3;
+}
+.background:nth-child(5) {
+  z-index: 2;
+}
+.background:nth-child(6) {
+  z-index: 1;
+}
+
+.content-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-flow: column nowrap;
+  transform: translateY(40vh);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  transition: all 1.7s cubic-bezier(0.22, 0.44, 0, 1);
+}
+
+.background.up-scroll {
+  transform: translate3d(0, -15vh, 0);
+}
+.background.up-scroll .content-wrapper {
+  transform: translateY(15vh);
+}
+.background.up-scroll + .background {
+  transform: translate3d(0, 30vh, 0);
+}
+.background.up-scroll + .background .content-wrapper {
+  transform: translateY(30vh);
+}
+
+.background.down-scroll {
+  transform: translate3d(0, -130vh, 0);
+}
+.background.down-scroll .content-wrapper {
+  transform: translateY(40vh);
+}
+.background.down-scroll + .background:not(.down-scroll) {
+  transform: translate3d(0, -15vh, 0);
+}
+.background.down-scroll + .background:not(.down-scroll) .content-wrapper {
+  transform: translateY(15vh);
+}

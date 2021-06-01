@@ -77,6 +77,7 @@ $table_prefix = 'elevative_cms_';
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define( 'WP_DEBUG', true );
+define('ALLOW_UNFILTERED_UPLOADS', true);
 define('WP_MEMORY_LIMIT', '512M');
 /* That's all, stop editing! Happy publishing. */
 

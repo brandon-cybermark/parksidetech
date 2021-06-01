@@ -2,9 +2,9 @@
 $pricing_type = get_sub_field('pricing_type');
 $content_block = get_sub_field('content_block');?>
 
-<section class="mb-5 <?php echo $pricing_type;?> section__wrapper">
-	<div class="container">
-		<div class="row">
+<section class="mb-5 <?php echo $pricing_type;?> section__wrapper section pp-scrollable" style="background-color: #FFF">
+	<div class="container h-100 align-items-center">
+		<div class="row h-100 align-items-center">
 			<div class="col-md-12">
 				<div class="section__container">
 					<div class="section__content">
@@ -14,7 +14,7 @@ $content_block = get_sub_field('content_block');?>
 			</div>
 		</div>
 		<?php if( have_rows('pricing_options') ): ?>
-		<div class="row mt-5 justify-content-center">
+		<div class="row mt-5 justify-content-center h-100 align-items-center">
 			 <?php while( have_rows('pricing_options') ): the_row(); 
 		        $title = get_sub_field('title');
 		        $price = get_sub_field('price');

@@ -70,4 +70,4 @@
 		</div><!-- .site-header-main -->
 	</div>
 </header><!-- .header -->
-		<div id="content" class="main-content">
+		<div id="pagepiling" class="main-content">

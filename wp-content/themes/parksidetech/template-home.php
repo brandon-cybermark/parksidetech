@@ -10,7 +10,7 @@ $heading_text = get_field('heading_text');
 $subheading_text = get_field('subheading_text');
 ?>
 <?php get_header(); ?>
-<div class="main-banner background">
+<div class="main-banner section pp-scrollable">
 	<div class="content-wrapper">
 		<div class="container">
 	  		<div class="heading-block tal">
@@ -33,7 +33,6 @@ $subheading_text = get_field('subheading_text');
 			</div>
 	</div>
 </div>
-<div id="fullpage">
 	<?php
 	if (have_rows('home_page_builder')) :
 	while (have_rows('home_page_builder')) :
@@ -80,6 +79,5 @@ $subheading_text = get_field('subheading_text');
 	endwhile;
 endif;
 ?>
-</div>
 
 <?php get_footer(); ?>
